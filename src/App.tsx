@@ -34,7 +34,7 @@ const STORAGE_KEY = "wakey-wakey-mobile-v2";
 
 const defaultTaskLabels = [
   "Brush teeth",
-  "Wash face",
+  "Drink Coffee",
   "Call Boyfriend",
   "Get dressed"
 ];
