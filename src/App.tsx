@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Check, Home, Pencil, Plus, RotateCcw, Trash2 } from "lucide-react";
 
 import bunnySleepy from "./assets/bunny-sleepy.png";
@@ -331,32 +331,25 @@ export default function App() {
 
                     <CharacterSparkles visible={stage.sparkles} />
 
-                    <AnimatePresence mode="wait">
-                      <motion.img
-                        key={stage.image}
+                    <motion.div
+                      animate={{
+                        y: [0, -4, 0],
+                        rotate: [0, -1.5, 1.5, 0],
+                      }}
+                      transition={{
+                        duration: 4.2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="relative z-10"
+                    >
+                      <img
                         src={stage.image}
                         alt={stage.title}
-                        initial={{ opacity: 0, scale: 0.9, y: 10, rotate: -4 }}
-                        animate={{
-                          opacity: 1,
-                          scale: 1,
-                          y: [0, -4, 0],
-                          rotate: [0, -1.5, 1.5, 0],
-                        }}
-                        exit={{ opacity: 0, scale: 1.04, y: -10, rotate: 4 }}
-                        transition={{
-                          opacity: { duration: 0.22 },
-                          scale: { type: "spring", stiffness: 220, damping: 18 },
-                          y: { duration: 3.2, repeat: Infinity, ease: "easeInOut" },
-                          rotate: {
-                            duration: 4.2,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                          },
-                        }}
-                        className="relative z-10 h-28 w-28 object-contain drop-shadow-lg"
+                        className="h-28 w-28 object-contain drop-shadow-lg"
+                        draggable={false}
                       />
-                    </AnimatePresence>
+                    </motion.div>
                   </div>
 
                   <h1 className="mt-4 text-3xl font-black tracking-tight">
