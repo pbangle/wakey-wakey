@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Check, Home, Pencil, Plus, RotateCcw, Trash2 } from "lucide-react";
 
 import bunnySleepy from "./assets/bunny-sleepy.png";
-import bunnyMid from "./assets/bunny-sleepy.png";
+import bunnyMid from "./assets/bunny-mid.png";
 import bunnyAlmost from "./assets/bunny-sleepy.png";
 import bunnyPrincess from "./assets/bunny-sleepy.png";
 
