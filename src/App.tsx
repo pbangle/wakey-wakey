@@ -33,12 +33,10 @@ type Stage = {
 const STORAGE_KEY = "wakey-wakey-mobile-v2";
 
 const defaultTaskLabels = [
-  "Make bed",
   "Brush teeth",
   "Wash face",
-  "Drink water",
-  "Get dressed",
-  "Open curtains",
+  "Call Boyfriend",
+  "Get dressed"
 ];
 
 function buildDefaultTasks(): Task[] {
