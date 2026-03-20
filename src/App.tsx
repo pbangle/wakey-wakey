@@ -33,10 +33,12 @@ type Stage = {
 const STORAGE_KEY = "wakey-wakey-mobile-v2";
 
 const defaultTaskLabels = [
+  "Make bed",
   "Brush teeth",
-  "Drink Coffee",
-  "Call Boyfriend",
-  "Get dressed"
+  "Wash face",
+  "Drink water",
+  "Get dressed",
+  "Open curtains",
 ];
 
 function buildDefaultTasks(): Task[] {
@@ -125,7 +127,7 @@ function NavButton({
     <button
       type="button"
       onClick={onClick}
-      className={`flex flex-1 flex-col items-center justify-center gap-1 rounded-2xl py-2 text-xs font-medium transition ${
+      className={`flex flex-1 flex-col items-center justify-center gap-1 rounded-2xl py-1.5 text-[11px] font-medium transition ${
         active ? "bg-white text-fuchsia-700 shadow-sm" : "text-zinc-500"
       }`}
     >
@@ -139,10 +141,10 @@ function CharacterSparkles({ visible }: { visible: boolean }) {
   if (!visible) return null;
 
   const sparkles = [
-    { className: "left-3 top-7", delay: 0 },
-    { className: "right-5 top-4", delay: 0.4 },
-    { className: "left-7 bottom-6", delay: 0.8 },
-    { className: "right-4 bottom-8", delay: 1.2 },
+    { className: "left-2 top-5", delay: 0 },
+    { className: "right-4 top-3", delay: 0.4 },
+    { className: "left-5 bottom-4", delay: 0.8 },
+    { className: "right-3 bottom-6", delay: 1.2 },
   ];
 
   return (
@@ -150,7 +152,7 @@ function CharacterSparkles({ visible }: { visible: boolean }) {
       {sparkles.map((sparkle, index) => (
         <motion.div
           key={index}
-          className={`absolute ${sparkle.className} text-lg`}
+          className={`absolute ${sparkle.className} text-base`}
           initial={{ opacity: 0, scale: 0.7 }}
           animate={{
             opacity: [0.2, 1, 0.2],
@@ -283,22 +285,22 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-rose-50 via-fuchsia-50 to-sky-50 text-zinc-800">
-      <div className="mx-auto flex min-h-screen w-full max-w-sm flex-col px-4 pb-28 pt-5">
-        <div className="mb-5 flex items-center justify-between">
+      <div className="mx-auto flex min-h-screen w-full max-w-sm flex-col px-3 pb-24 pt-4">
+        <div className="mb-3 flex items-center justify-between">
           <div>
-            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-fuchsia-500">
+            <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-fuchsia-500">
               Wakey Wakey
             </div>
-            <div className="text-lg font-bold">Soft morning routine</div>
+            <div className="text-base font-bold">Soft morning routine</div>
           </div>
 
           {screen === "home" && selectedTasks.length > 0 && (
             <button
               type="button"
               onClick={resetToday}
-              className="inline-flex items-center rounded-2xl border border-white/80 bg-white/90 px-4 py-2 text-sm font-medium shadow-sm transition hover:bg-white"
+              className="inline-flex items-center rounded-2xl border border-white/80 bg-white/90 px-3 py-1.5 text-xs font-medium shadow-sm transition hover:bg-white"
             >
-              <RotateCcw className="mr-2 h-4 w-4" />
+              <RotateCcw className="mr-1.5 h-3.5 w-3.5" />
               Reset
             </button>
           )}
@@ -308,12 +310,12 @@ export default function App() {
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex flex-1 flex-col gap-4"
+            className="flex flex-1 flex-col gap-3"
           >
             <div className="overflow-hidden rounded-[2rem] border border-white/80 bg-white/90 shadow-lg">
-              <div className={`bg-gradient-to-br ${stage.aura} p-6`}>
+              <div className={`bg-gradient-to-br ${stage.aura} p-4`}>
                 <div className="text-center">
-                  <div className="relative mx-auto grid h-40 w-40 place-items-center rounded-full bg-white/70 shadow-inner">
+                  <div className="relative mx-auto grid h-36 w-36 place-items-center rounded-full bg-white/70 shadow-inner">
                     <motion.div
                       animate={{
                         scale: [1, 1.07, 1],
@@ -344,26 +346,26 @@ export default function App() {
                       <img
                         src={stage.image}
                         alt={stage.title}
-                        className="h-28 w-28 object-contain drop-shadow-lg"
+                        className="h-32 w-32 object-contain drop-shadow-lg"
                         draggable={false}
                       />
                     </motion.div>
                   </div>
 
-                  <h1 className="mt-4 text-3xl font-black tracking-tight">
+                  <h1 className="mt-2 text-2xl font-black tracking-tight">
                     {stage.title}
                   </h1>
-                  <p className="mt-1 text-sm text-zinc-500">{stage.subtitle}</p>
+                  <p className="mt-0.5 text-xs text-zinc-500">{stage.subtitle}</p>
                 </div>
 
-                <div className="mt-5 space-y-2">
-                  <div className="flex items-center justify-between text-sm text-zinc-500">
+                <div className="mt-3 space-y-1.5">
+                  <div className="flex items-center justify-between text-xs text-zinc-500">
                     <span>Today</span>
                     <span>
                       {completedTasks.length} / {selectedTasks.length} done
                     </span>
                   </div>
-                  <div className="h-3 overflow-hidden rounded-full bg-white/70">
+                  <div className="h-2.5 overflow-hidden rounded-full bg-white/70">
                     <motion.div
                       className="h-full rounded-full bg-gradient-to-r from-pink-400 to-violet-400"
                       animate={{ width: `${progress}%` }}
@@ -376,49 +378,49 @@ export default function App() {
 
             {selectedTasks.length === 0 ? (
               <div className="rounded-[2rem] border border-white/80 bg-white/90 shadow-lg">
-                <div className="space-y-4 p-5 text-center">
-                  <div className="text-5xl">📝</div>
+                <div className="space-y-3 p-4 text-center">
+                  <div className="text-4xl">📝</div>
                   <p className="text-sm text-zinc-500">
                     You don’t have a routine yet.
                   </p>
                   <button
                     type="button"
                     onClick={() => setScreen("edit")}
-                    className="h-12 w-full rounded-2xl bg-gradient-to-r from-pink-400 to-violet-400 font-bold text-white transition hover:opacity-95"
+                    className="h-11 w-full rounded-2xl bg-gradient-to-r from-pink-400 to-violet-400 text-sm font-bold text-white transition hover:opacity-95"
                   >
                     Create my routine
                   </button>
                 </div>
               </div>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {selectedTasks.map((task, index) => (
                   <button
                     key={task.id}
                     type="button"
                     onClick={() => toggleTaskCompletion(task.id)}
-                    className={`flex w-full items-center gap-4 rounded-[1.5rem] border p-4 text-left shadow-sm transition ${
+                    className={`flex w-full items-center gap-3 rounded-[1.25rem] border p-3 text-left shadow-sm transition ${
                       task.completed
                         ? "border-fuchsia-200 bg-gradient-to-r from-rose-50 to-fuchsia-50"
                         : "border-white/80 bg-white/95"
                     }`}
                   >
                     <div
-                      className={`grid h-11 w-11 shrink-0 place-items-center rounded-full ${
+                      className={`grid h-9 w-9 shrink-0 place-items-center rounded-full ${
                         task.completed
                           ? "bg-gradient-to-r from-pink-400 to-violet-400 text-white"
                           : "bg-zinc-100 text-zinc-400"
                       }`}
                     >
-                      <Check className="h-5 w-5" />
+                      <Check className="h-4 w-4" />
                     </div>
 
                     <div className="min-w-0 flex-1">
-                      <div className="text-xs font-semibold uppercase tracking-wide text-zinc-400">
+                      <div className="text-[10px] font-semibold uppercase tracking-wide text-zinc-400">
                         Step {index + 1}
                       </div>
                       <div
-                        className={`mt-1 text-base font-semibold ${
+                        className={`mt-0.5 text-sm font-semibold ${
                           task.completed
                             ? "text-zinc-500 line-through"
                             : "text-zinc-800"
@@ -434,10 +436,10 @@ export default function App() {
 
             {selectedTasks.length > 0 && progress === 100 && (
               <div className="rounded-[2rem] border border-white/80 bg-white/90 shadow-lg">
-                <div className="p-5 text-center">
-                  <div className="text-4xl">✨</div>
-                  <div className="mt-2 text-lg font-bold">All done</div>
-                  <div className="mt-1 text-sm text-zinc-500">
+                <div className="p-4 text-center">
+                  <div className="text-3xl">✨</div>
+                  <div className="mt-1 text-base font-bold">All done</div>
+                  <div className="mt-0.5 text-xs text-zinc-500">
                     The bunny is fully ready.
                   </div>
                 </div>
@@ -450,22 +452,22 @@ export default function App() {
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex flex-1 flex-col gap-4"
+            className="flex flex-1 flex-col gap-3"
           >
             <div>
-              <h2 className="text-2xl font-black tracking-tight">Edit routine</h2>
-              <p className="mt-1 text-sm text-zinc-500">
+              <h2 className="text-xl font-black tracking-tight">Edit routine</h2>
+              <p className="mt-0.5 text-xs text-zinc-500">
                 Keep it short so it feels mobile and easy.
               </p>
             </div>
 
             <div className="rounded-[2rem] border border-white/80 bg-white/90 shadow-lg">
-              <div className="p-4">
-                <div className="space-y-3">
+              <div className="p-3">
+                <div className="space-y-2.5">
                   {tasks.map((task) => (
                     <div
                       key={task.id}
-                      className="flex items-center gap-3 rounded-2xl bg-zinc-50 px-3 py-3"
+                      className="flex items-center gap-3 rounded-2xl bg-zinc-50 px-3 py-2.5"
                     >
                       <button
                         type="button"
@@ -473,22 +475,24 @@ export default function App() {
                         className="flex min-w-0 flex-1 items-center gap-3 text-left"
                       >
                         <div
-                          className={`grid h-7 w-7 shrink-0 place-items-center rounded-full ${
+                          className={`grid h-6 w-6 shrink-0 place-items-center rounded-full ${
                             task.selected
                               ? "bg-gradient-to-r from-pink-400 to-violet-400 text-white"
                               : "bg-white text-zinc-300"
                           }`}
                         >
-                          <Check className="h-4 w-4" />
+                          <Check className="h-3.5 w-3.5" />
                         </div>
-                        <span className="truncate font-medium">{task.title}</span>
+                        <span className="truncate text-sm font-medium">
+                          {task.title}
+                        </span>
                       </button>
 
                       {task.kind === "custom" && (
                         <button
                           type="button"
                           onClick={() => removeTask(task.id)}
-                          className="grid h-9 w-9 place-items-center rounded-xl text-zinc-500 transition hover:bg-white"
+                          className="grid h-8 w-8 place-items-center rounded-xl text-zinc-500 transition hover:bg-white"
                           aria-label={`Delete ${task.title}`}
                         >
                           <Trash2 className="h-4 w-4" />
@@ -501,7 +505,7 @@ export default function App() {
             </div>
 
             <div className="rounded-[2rem] border border-white/80 bg-white/90 shadow-lg">
-              <div className="space-y-3 p-4">
+              <div className="space-y-3 p-3">
                 <div className="text-sm font-semibold text-zinc-700">
                   Add custom task
                 </div>
@@ -514,13 +518,13 @@ export default function App() {
                       if (e.key === "Enter") addCustomTask();
                     }}
                     placeholder="Feed cat, sunscreen..."
-                    className="h-11 flex-1 rounded-2xl border border-white/80 bg-white px-4 outline-none ring-0 placeholder:text-zinc-400 focus:border-fuchsia-200"
+                    className="h-10 flex-1 rounded-2xl border border-white/80 bg-white px-4 text-sm outline-none ring-0 placeholder:text-zinc-400 focus:border-fuchsia-200"
                   />
 
                   <button
                     type="button"
                     onClick={addCustomTask}
-                    className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-r from-pink-400 to-violet-400 text-white transition hover:opacity-95"
+                    className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-r from-pink-400 to-violet-400 text-white transition hover:opacity-95"
                     aria-label="Add task"
                   >
                     <Plus className="h-4 w-4" />
@@ -538,8 +542,8 @@ export default function App() {
           </motion.div>
         )}
 
-        <div className="fixed bottom-4 left-1/2 z-20 w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 px-4">
-          <div className="grid grid-cols-2 rounded-[2rem] border border-white/80 bg-white/80 p-2 shadow-xl backdrop-blur">
+        <div className="fixed bottom-3 left-1/2 z-20 w-[calc(100%-1.5rem)] max-w-sm -translate-x-1/2 px-3">
+          <div className="grid grid-cols-2 rounded-[2rem] border border-white/80 bg-white/80 p-1.5 shadow-xl backdrop-blur">
             <NavButton
               active={screen === "home"}
               label="Home"
